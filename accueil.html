@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Acceuil Blog Haribo</title>
+</head>
+
+<body>
+
+    <?php include "nav.php";?>
+
+    <main class="container">
+        <h1>Bienvenue <?php if(isset($_SESSION['mail'])){
+            echo $_SESSION['prenom'];
+            }else{
+            echo "passionné(e) ";
+            }; ?> sur le blog haribo !</h1>
+
+        <section class="row">
+            <?php foreach($listePublications as $publication): ?>
+            <div class="card m-2 p-2" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><a
+                            href="publication.php?maPublication=<?= $publication['id_publication'] ?>"><?= $publication['titre'] ?></a>
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?= $publication['pseudo'] ?></h6>
+                    <p class="card-text"><?= $publication['extrait'] ?>...</p>
+                    <h6 class="card-subtitle mb-2 text-muted"><?= $publication['dateDePublication'] ?></h6>
+                    <p><?php if(isset($_SESSION['mail'])){
+                        echo '<a href="newPubli.php"><button class="btn btn-outline-danger my-2 my-sm-0">Modifier</button></a>';
+                        }; ?></p>
+                   
+                </div>
+            </div>
+            <?php endforeach ?>
+        </section>
+
+        <section class="row">
+            <div class="card m-2 p-2" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Créer votre publication !</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">...</h6>
+                    <p class="card-text">...</p>
+                    <h6 class="card-subtitle mb-2 text-muted">...</h6>
+                    <p><?php if(isset($_SESSION['mail'])){
+                        echo '<a href="newPubli.php"><button class="btn btn-outline-danger my-2 my-sm-0">Créer</button></a>';
+                        }; ?></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>
+
+</html>

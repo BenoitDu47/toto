@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Détail de la liste</title>
+</head>
+
+<body>
+
+    <?php include "nav.php";?>
+
+    <main>
+
+        <section class="container py-5">
+            <h1>La nouvelle Publication de <?php if(isset($_SESSION['mail'])){
+                echo $_SESSION['prenom'];
+                }else{
+                echo "passionné(e) ";
+                }; ?> !</h1>
+            <form action="newPubli.php" method="POST">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+        
+                        <label for="titre">Titre</label>
+                        <input type="text" class="form-control" name="titre" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="contenu">Contenu</label>
+                        <input type="text" class="form-control" name="contenu" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="dateDePublication"></label>
+                        <input type="date" id="start" name="dateDePublication" value="2020-12-08">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_categ"></label>
+                        <select name="id_categ" class="form-select " aria-label="">
+                            <option selected>Catégories</option>
+                            <?php foreach($listeDesCategories as $categorie): ?>
+                            <option value="<?= $categorie['id_categorie'] ?>"><?= $categorie['titre_categorie'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_user"></label>
+                        <select name="id_user" class="form-select " aria-label="">
+                            <option selected>Ton pseudo</option>
+                            <?php foreach($listeDesUsers as $User): ?>
+                            <option value="<?= $User['id_user'] ?>"><?= $User['pseudo'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+                    <button type="submit" name="submit" class="btn btn-dark col-2">Envoyer</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+</body>
+
+</html>
